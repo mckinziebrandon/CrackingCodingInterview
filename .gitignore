@@ -1,0 +1,11 @@
+# List of directories to ignore completely:
+61B_skeleton
+out
+IDEACOLORS
+javalib
+
+# Ignore Intellij-specific content.
+.idea
+*.iml
+
+
