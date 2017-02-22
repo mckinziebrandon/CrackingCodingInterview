@@ -1,4 +1,4 @@
-package DataStructures;
+package DataStructures.Simple;
 
 
 /** Defines a recursive list of integers.
@@ -14,14 +14,14 @@ public class IntNode {
         this.next = n;
     }
 
-    /** Retuns the size of this Node */
+    /** Retuns the size of this LLRBNode */
     public int size() {
         /* your code here */
         if (this.next == null) return 1;
         return 1 + next.size();
     }
 
-    /** Returns the size of this Node. */
+    /** Returns the size of this LLRBNode. */
     public int iterativeSize() {
         /* your code here */
         IntNode node = this;
@@ -34,7 +34,7 @@ public class IntNode {
     }
 
     /** In class exercise 1:
-     * Returns ith item of this Node. For
+     * Returns ith item of this LLRBNode. For
      * simplicity, assume the item exists. */
     public int get(int i) {
         /* your code here */
@@ -45,7 +45,7 @@ public class IntNode {
     }
 
     /** Returns the Intlist as a string. Automatically called
-     * whenever you try to print an Node. */
+     * whenever you try to print an LLRBNode. */
     public String toString() {
         /* your code here */
         if (size() == 0) return "()";
@@ -57,7 +57,7 @@ public class IntNode {
         return s;
     }
 
-    /** Returns an Node identical to L, but with
+    /** Returns an LLRBNode identical to L, but with
      * each element incremented by x. L is not allowed
      * to change. */
     public static IntNode incrList(IntNode L, int x) {
@@ -65,7 +65,7 @@ public class IntNode {
         return L;
     }
 
-    /** Returns an Node identical to L, but with
+    /** Returns an LLRBNode identical to L, but with
      * each element incremented by x. Not allowed to use
      * the 'new' keyword. */
     public static IntNode dincrList(IntNode L, int x) {

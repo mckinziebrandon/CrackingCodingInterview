@@ -1,4 +1,4 @@
-package DataStructures;
+package DataStructures.Simple;
 
 /** Represent a list of integers, where all the "list" work is delegated
  * to a naked IntList. */

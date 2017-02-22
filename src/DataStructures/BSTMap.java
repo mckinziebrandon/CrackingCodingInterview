@@ -123,7 +123,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         if (cmp < 0)        node.lchild =  put(node.lchild, key, val);
         else if (cmp > 0)   node.rchild = put(node.rchild, key, val);
         else                node.val = val;
-        // Update the value of node.N in case of newly created BSTNode.
+        // Update the value of node.N in case of newly created LLRBNode.
         node.N = 1 + size(node.rchild) + size(node.lchild);
         return node;
     }

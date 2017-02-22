@@ -1,4 +1,4 @@
-package DataStructures;
+package DataStructures.Simple;
 /** Array based list. [DIY FILLED-IN]
  *  @author Josh Hug
  *  @author Brandon McKinzie

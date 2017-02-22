@@ -1,6 +1,6 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
-import DataStructures.AList;
+import DataStructures.Simple.AList;
 
 /** Tests the AList class.
  *  @author Josh Hug
