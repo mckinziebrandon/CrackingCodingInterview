@@ -1,6 +1,6 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
-import DataStructures.DList;
+import DataStructures.LinkedList;
 
 public class TestDList {
 
@@ -8,7 +8,7 @@ public class TestDList {
     public void testDList() {
 
         // Create & test [1, 4, 2, 9]
-        DList<Integer> intDList = new DList<>();
+        LinkedList<Integer> intDList = new LinkedList<>();
         intDList.insertFront(4);
         intDList.insertBack(2);
         intDList.insertFront(1);
@@ -17,7 +17,7 @@ public class TestDList {
 
         // Create & test "Hi how are you";
         String[] testStr = "Hi how are you".split(" ");
-        DList<String> strDList = new DList<>(testStr);
+        LinkedList<String> strDList = new LinkedList<>(testStr);
         assertEquals("(Hi, how, are, you)", strDList.toString());
     }
 }

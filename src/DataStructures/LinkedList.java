@@ -2,7 +2,7 @@ package DataStructures;
 
 /** Doubly-linked version of S[ingly-linked]List.java.
  * Also supports generic type elements instead of requiring Integers. */
-public class DList<E> {
+public class LinkedList<E> {
 
     private class Node {
         public E item;
@@ -20,20 +20,20 @@ public class DList<E> {
     private Node sentinel;
 
     /** Creates an empty list. */
-    public DList() {
+    public LinkedList() {
         sentinel = new Node();
         sentinel.next = sentinel.prev = sentinel;
         size = 0;
     }
 
-    public DList(E x) {
+    public LinkedList(E x) {
         sentinel = new Node();
         sentinel.next = sentinel.prev = sentinel;
         size = 0;
         this.insertFront(x);
     }
 
-    public DList(E[] items) {
+    public LinkedList(E[] items) {
         sentinel = new Node();
         sentinel.next = sentinel.prev = sentinel;
         size = 0;
