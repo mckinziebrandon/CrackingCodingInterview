@@ -1,18 +1,21 @@
-package CourseWork.Lab_BST.lab8tester;
 import static org.junit.Assert.*;
+
+import DataStructures.HashMap;
 import org.junit.Test;
-import DataStructures.BSTMap;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /** Tests by Brendan Hu, Spring 2015, revised for 2016 by Josh Hug */
-public class TestBSTMap {
+public class TestMyHashMap {
 
 	@Test
     public void sanityGenericsTest() {
     	try {
-    		BSTMap<String, String> a = new BSTMap<String, String>();
-	    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
-	    	BSTMap<Integer, String> c = new BSTMap<Integer, String>();
-	    	BSTMap<Boolean, Integer> e = new BSTMap<Boolean, Integer>();
+    		HashMap<String, String> a = new HashMap<String, String>();
+	    	HashMap<String, Integer> b = new HashMap<String, Integer>();
+	    	HashMap<Integer, String> c = new HashMap<Integer, String>();
+	    	HashMap<Boolean, Integer> e = new HashMap<Boolean, Integer>();
 	    } catch (Exception e) { 
 	    	fail();
 	    }
@@ -21,7 +24,7 @@ public class TestBSTMap {
     //assumes put/size/containsKey/get work
 	@Test
     public void sanityClearTest() {
-    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+    	HashMap<String, Integer> b = new HashMap<String, Integer>();
         for (int i = 0; i < 455; i++) {
             b.put("hi" + i, 1);
             //make sure put is working via containsKey and get
@@ -38,7 +41,7 @@ public class TestBSTMap {
     // assumes put works
     @Test
     public void sanityContainsKeyTest() {
-    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+    	HashMap<String, Integer> b = new HashMap<String, Integer>();
         assertFalse(b.containsKey("waterYouDoingHere"));
         b.put("waterYouDoingHere", 0);
         assertTrue(b.containsKey("waterYouDoingHere"));
@@ -47,7 +50,7 @@ public class TestBSTMap {
     // assumes put works
     @Test
     public void sanityGetTest() {
-    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+    	HashMap<String, Integer> b = new HashMap<String, Integer>();
         assertEquals(null,b.get("starChild"));
         b.put("starChild", 5);
         assertNotEquals(null,b.get("starChild"));
@@ -59,7 +62,7 @@ public class TestBSTMap {
     // assumes put works
     @Test
     public void sanitySizeTest() {
-    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+    	HashMap<String, Integer> b = new HashMap<String, Integer>();
         assertEquals(0, b.size());
         b.put("hi", 1);
         assertEquals(1, b.size());
@@ -71,12 +74,29 @@ public class TestBSTMap {
     //assumes get/containskey work
     @Test
     public void sanityPutTest() {
-    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+    	HashMap<String, Integer> b = new HashMap<String, Integer>();
         b.put("hi", 1);
         assertTrue(b.containsKey("hi") && b.get("hi") != null);
     }
 
+    /* 
+    * Sanity test for keySet
+    */
+    @Test
+    public void sanityKeySetTest() {
+    	HashMap<String, Integer> b = new HashMap<String, Integer>();
+        HashSet<String> values = new HashSet<String>();
+        for (int i = 0; i < 455; i++) {
+            b.put("hi" + i, 1);   
+            values.add("hi" + i);
+        }
+        assertEquals(455, b.size()); //keys are there
+        Set<String> keySet = b.keySet();
+        assertTrue(values.containsAll(keySet));
+        assertTrue(keySet.containsAll(values));
+    }
+
     public static void main(String[] args) {
-        jh61b.junit.TestRunner.runTests(TestBSTMap.class);
+        jh61b.junit.TestRunner.runTests(TestMyHashMap.class);
     }
 }

@@ -1,4 +1,3 @@
-package CourseWork.Lab_Hashing.lab9;
 import java.util.regex.Pattern;
 import java.util.Random;
 

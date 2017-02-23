@@ -1,6 +1,6 @@
 package DataStructures;
-import CourseWork.Lab_Hashing.lab9.Map61B;
-import CourseWork.Lab_Hashing.lab9.ULLMap;
+import DataStructures.Interfaces.Map61B;
+import DataStructures.Simple.ULLMap;
 
 import java.util.*;
 

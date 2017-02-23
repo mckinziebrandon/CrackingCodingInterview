@@ -1,7 +1,7 @@
-package CourseWork.Lab_Hashing.lab9;
 import java.io.IOException;
 import java.util.Scanner;
 
+import DataStructures.Simple.ULLMap;
 import DataStructures.HashMap;
 import edu.princeton.cs.algs4.Stopwatch;
 
@@ -28,7 +28,7 @@ public class InsertRandomSpeedTest {
         String repeat = "y";
         do {
             System.out.print("\nEnter # strings to insert into ULLMap: ");
-            timeRandomMap61B(new ULLMap<String, Integer>(), 
+            timeRandomMap61B(new ULLMap<String, Integer>(),
                             waitForPositiveInt(input), L);
 
             System.out.print("\nEnter # strings to insert into your HashMap: ");

@@ -1,4 +1,4 @@
-package CourseWork.Lab_HeapMinPQ;
+package DataStructures;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,12 @@ import java.util.ArrayList;
  * A Generic heap class. Unlike Java's priority queue, this heap doesn't just
  * store Comparable objects. Instead, it can store any type of object
  * (represented by type T), along with a priority value.
+ *
+ * CLARIFICATION: the 'min' is for 'min priority'. This is not clear in the lab spec.
  */
-public class ArrayHeap<T> {
+public class MinHeap<T> {
+    private int size = 0;
+    private static final int START_INDEX = 1;
 	private ArrayList<Node> contents = new ArrayList<Node>();
 
 	/**
@@ -15,25 +19,55 @@ public class ArrayHeap<T> {
 	 */
 	public void insert(T item, double priority) {
 
+	    // 1. Put the item you're adding in the left-most spot in the bottom level of the tree.
+        int newNodeIndex = getLastIndex() + 1;
+	    setNode(newNodeIndex, new Node(item, priority));
+	    size += 1;
+
+	    // 2. Swap the added item with its parent until it's larger than its parent or the new root.
+	    while (newNodeIndex == min(newNodeIndex, getParentOf(newNodeIndex)) && !isRoot(newNodeIndex)) {
+	        newNodeIndex = bubbleUp(newNodeIndex);
+        }
 	}
 
 	/**
-	 * Returns the LLRBNode with the smallest priority value, but does not remove it
+	 * Returns the Node with the smallest priority value, but does not remove it
 	 * from the heap.
 	 */
 	public Node peek() {
-		// TODO Complete this method!
-		return null;
+	    return getFirst();
 	}
 
 	/**
-	 * Returns the LLRBNode with the smallest priority value, and removes it from
+	 * Returns the Node with the smallest priority value, and removes it from
 	 * the heap. This is dequeue, or poll.
 	 */
 	public Node removeMin() {
-		// TODO Complete this method!
-		return null;
+	    if (size == 0) return null;
+	    Node minNode = getFirst();
+
+        int bubbleIndex = 1;
+        // Copy bubbleNode to front.
+	    setNode(bubbleIndex, getLast());
+	    // Delete bubbleNode that's still at back.
+	    setNode(getLastIndex(), null);
+        size -= 1;
+
+        while (largerThanChildren(bubbleIndex)) {
+            bubbleIndex = bubbleDown(bubbleIndex);
+        }
+
+        return minNode;
 	}
+
+
+	/**
+     * @param i index of the 'parent'.
+     * @return true if parent priority > both children priority. */
+	private boolean largerThanChildren(int i) {
+	    if (size <= 1) return false;
+	    return min(i, min(getLeftOf(i), getRightOf(i))) != i;
+    }
 
 	/**
 	 * Change the node in this heap with the given item to have the given
@@ -41,14 +75,33 @@ public class ArrayHeap<T> {
 	 * nodes with the same item. Check for item equality with .equals(), not ==
 	 */
 	public void changePriority(T item, double priority) {
-		// TODO Complete this method!
+	    // TODO: this does not rearrange the heap after changing the priority (but it should).
+	    Node changedNode;
+	    for (Node node : contents) {
+	        if (node.item().equals(item)) {
+	            node.myPriority = priority;
+                changedNode = node;
+	            break;
+            }
+        }
 	}
+
 
 	/**
 	 * Prints out the heap sideways.
 	 */
 	@Override
 	public String toString() {
+        System.out.print("(raw array): ");
+	    for (Node n : contents) {
+	        if (n == null) {
+	            System.out.print(" [null] ");
+	            continue;
+            }
+            System.out.print(" " + n.item().toString());
+        }
+        System.out.println();
+
 		return toStringHelper(1, "");
 	}
 
@@ -80,6 +133,23 @@ public class ArrayHeap<T> {
 			return contents.get(index);
 		}
 	}
+	public int size() {
+	    return size;
+    }
+
+	private Node getLast() {
+	    Node last = getNode(getLastIndex());
+	    return last;
+    }
+
+    private int getLastIndex() {
+	    // because offset by 1 (zeroth entry always null);
+	    return size;
+    }
+
+    private Node getFirst() {
+	    return getNode(1);
+    }
 
 	private void setNode(int index, Node n) {
 		// In the case that the ArrayList is not big enough
@@ -87,6 +157,7 @@ public class ArrayHeap<T> {
 		while (index + 1 >= contents.size()) {
 			contents.add(null);
 		}
+
 		contents.set(index, n);
 	}
 
@@ -104,53 +175,64 @@ public class ArrayHeap<T> {
 	 * Returns the index of the node to the left of the node at i.
 	 */
 	private int getLeftOf(int i) {
-		// TODO Complete this method!
-		return 0;
+	    return 2 * i;
 	}
 
 	/**
 	 * Returns the index of the node to the right of the node at i.
 	 */
 	private int getRightOf(int i) {
-		// TODO Complete this method!
-		return 0;
+	    return 2 * i + 1;
 	}
 
 	/**
 	 * Returns the index of the node that is the parent of the node at i.
 	 */
 	private int getParentOf(int i) {
-		// TODO Complete this method!
-		return 0;
+	    return i / 2;
 	}
 
+	private int getSmallestChildOf(int i) {
+	    return min(getLeftOf(i), getRightOf(i));
+    }
+
 	/**
-	 * Adds the given node as a left child of the node at the given index.
+     * Adds node 'n' as the left child of the node at 'index'.
 	 */
 	private void setLeft(int index, Node n) {
-		// TODO Complete this method!
+	    setNode(getLeftOf(index), n);
 	}
 
 	/**
 	 * Adds the given node as the right child of the node at the given index.
 	 */
-	private void setRight(int inde, Node n) {
-		// TODO Complete this method!
+	private void setRight(int index, Node n) {
+        setNode(getRightOf(index), n);
 	}
 
 	/**
 	 * Bubbles up the node currently at the given index.
+     * NOTE: this doesn't care about min-heap properties, it just does the operation.
 	 */
-	private void bubbleUp(int index) {
-		// TODO Complete this method!
+	private int bubbleUp(int index) {
+	    int newIndex = getParentOf(index);
+	    swap(index, newIndex);
+	    return newIndex;
 	}
 
 	/**
 	 * Bubbles down the node currently at the given index.
+     * NOTE: this doesn't care about min-heap properties, it just does the operation.
 	 */
-	private void bubbleDown(int inex) {
-		// TODO Complete this method!
+	private int bubbleDown(int index) {
+	    int newIndex = min(getLeftOf(index), getRightOf(index));
+	    swap(index, newIndex);
+	    return newIndex;
 	}
+
+    private boolean isRoot(int i) {
+        return getNode(i) == getFirst();
+    }
 
 	/**
 	 * Returns the index of the node with smaller priority. Precondition: Not
@@ -194,7 +276,7 @@ public class ArrayHeap<T> {
 	}
 
 	public static void main(String[] args) {
-		ArrayHeap<String> heap = new ArrayHeap<String>();
+		MinHeap<String> heap = new MinHeap<String>();
 		heap.insert("c", 3);
 		heap.insert("i", 9);
 		heap.insert("g", 7);

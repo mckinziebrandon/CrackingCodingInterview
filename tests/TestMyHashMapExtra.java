@@ -1,4 +1,3 @@
-package CourseWork.Lab_Hashing.lab9tester;
 import static org.junit.Assert.*;
 
 import DataStructures.HashMap;

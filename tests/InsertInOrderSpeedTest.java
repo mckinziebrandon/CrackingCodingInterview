@@ -1,14 +1,13 @@
-package CourseWork.Lab_BST.lab8;
-import java.util.TreeMap;
 import java.io.IOException;
 import java.util.Scanner;
 
-import DataStructures.BSTMap;
+import DataStructures.Simple.ULLMap;
 import DataStructures.Interfaces.Map61B;
+import DataStructures.HashMap;
 import edu.princeton.cs.algs4.Stopwatch;
 
 /** Performs a timing test on three different set implementations.
- *  For BSTMap purposes assumes that <K,V> are <String, Integer> pairs.
+ *  For HashMap purposes assumes that <K,V> are <String, Integer> pairs.
  *  @author Josh Hug 
  *  @author Brendan Hu
  */
@@ -30,15 +29,15 @@ public class InsertInOrderSpeedTest {
         String repeat = "y";
         do {
             System.out.print("\nEnter # strings to insert into ULLMap: ");
-            timeInOrderMap61B(new ULLMap<String, Integer>(), 
+            timeInOrderMap61B(new ULLMap<String, Integer>(),
                               i.waitForPositiveInt(input));
        
-            System.out.print("\nEnter # strings to insert into BSTMap: ");
-            timeInOrderMap61B(new BSTMap<String, Integer>(),
+            System.out.print("\nEnter # strings to insert into HashMap: ");
+            timeInOrderMap61B(new HashMap<String, Integer>(),
                               i.waitForPositiveInt(input));
     
-            System.out.print("\nEnter # strings to insert into Java's TreeMap: ");
-            timeInOrderTreeMap(new TreeMap<String, Integer>(), 
+            System.out.print("\nEnter # strings to insert into Java's HashMap: ");
+            timeInOrderHashMap(new java.util.HashMap(),
                               i.waitForPositiveInt(input));                        
 
             System.out.print("\nWould you like to try more timed-tests? (y/n): ");
@@ -61,9 +60,9 @@ public class InsertInOrderSpeedTest {
         return sw.elapsedTime();
     }
     
-    /** Returns time needed to put N strings into TreeMap in increasing order.
+    /** Returns time needed to put N strings into HashMap in increasing order.
      */
-    public static double insertInOrder(TreeMap<String, Integer> ts, int N) {
+    public static double insertInOrder(java.util.HashMap ts, int N) {
         Stopwatch sw = new Stopwatch();
         String s = "cat";
         for (int i = 0; i < N; i++) {
@@ -90,14 +89,14 @@ public class InsertInOrderSpeedTest {
     }
 
     /*
-        Attempts to insert N in-order strings of length L into TreeMap,
+        Attempts to insert N in-order strings of length L into HashMap,
         Prints time of the N insert calls, otherwise
         Prints a nice message about the error
     */
-    public static void timeInOrderTreeMap(TreeMap<String, Integer> treeMap, int N) {        
+    public static void timeInOrderHashMap(java.util.HashMap hashMap, int N) {
         try {
-            double javaTime = insertInOrder(treeMap, N);
-            System.out.printf("Java's Built-in TreeMap: %.2f sec\n", javaTime);
+            double javaTime = insertInOrder(hashMap, N);
+            System.out.printf("Java's Built-in HashMap: %.2f sec\n", javaTime);
         } catch (StackOverflowError e) { 
             printInfoOnStackOverflow(N); 
         } catch (RuntimeException e) { 
