@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import DataStructures.Interfaces.Map61B;
 import DataStructures.Simple.ULLMap;
 import DataStructures.HashMap;
 import edu.princeton.cs.algs4.Stopwatch;
