@@ -1,6 +1,6 @@
 import static org.junit.Assert.*;
 
-import static Sorting.MergeSort.*;
+import static Algorithms.MergeSort.*;
 import org.junit.Test;
 import edu.princeton.cs.algs4.Queue;
 

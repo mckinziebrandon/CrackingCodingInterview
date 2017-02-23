@@ -1,8 +1,30 @@
 package DataStructures;
 
+import java.util.Iterator;
+
 /** Doubly-linked version of S[ingly-linked]List.java.
  * Also supports generic type elements instead of requiring Integers. */
-public class LinkedList<E> {
+public class LinkedList<E> implements Iterable<E> {
+
+    @Override
+    public Iterator<E> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator<E> implements Iterator<E> {
+        Node currNode = sentinel;
+
+        @Override
+        public boolean hasNext() {
+            return currNode.next != sentinel;
+        }
+
+        @Override
+        public E next() {
+            currNode = currNode.next;
+            return (E) currNode.item;
+        }
+    }
 
     private class Node {
         public E item;

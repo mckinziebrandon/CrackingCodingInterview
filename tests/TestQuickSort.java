@@ -1,7 +1,7 @@
 
 import static org.junit.Assert.*;
 
-import static Sorting.QuickSort.*;
+import static Algorithms.QuickSort.*;
 import org.junit.Test;
 import edu.princeton.cs.algs4.Queue;
 

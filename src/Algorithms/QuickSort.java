@@ -1,4 +1,4 @@
-package Sorting;
+package Algorithms;
 
 import edu.princeton.cs.algs4.Queue;
 
