@@ -1,4 +1,5 @@
-package CourseWork.hw4.hw4.puzzle;
+
+package hw4.puzzle;
 
 import java.util.Arrays;
 
@@ -50,6 +51,7 @@ public class Board {
         int numWrong = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
+                if (tileAt(i, j) == 0) continue;
                 if (tileAt(i, j) != goalAt(i, j)) numWrong++;
             }
         }
@@ -62,6 +64,7 @@ public class Board {
         int sum = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
+                if (tileAt(i, j) == 0) continue;
                 sum += manhattan(i, j);
             }
         }
@@ -115,7 +118,7 @@ public class Board {
     public String toString() {
         StringBuilder s = new StringBuilder();
         int N = size();
-        s.append(N + "\n");
+        s.append("\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 s.append(String.format("%2d ", tileAt(i,j)));
@@ -125,5 +128,6 @@ public class Board {
         s.append("\n");
         return s.toString();
     }
+
 
 }

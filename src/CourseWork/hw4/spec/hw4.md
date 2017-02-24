@@ -137,7 +137,7 @@ Your program should work correctly for arbitrary N-by-N boards (for any 1 < N < 
 
 To test against input, run the following command from the hw4 directory after compiling:
 
-    java hw4.puzzle.Solver [input file]
+    java hw4.hw4.puzzle.Solver [input file]
 	
 So, if I tested against an input file `input/test01.in` with the following contents:
 
@@ -147,7 +147,7 @@ So, if I tested against an input file `input/test01.in` with the following conte
 	
 I should get the following output: 
 
-    $ java hw4.puzzle.Solver input/test01.in
+    $ java hw4.hw4.puzzle.Solver input/test01.in
     Minimum number of moves = 1
     2
     1  2
@@ -201,7 +201,7 @@ The shortest solution to puzzle4x4-hard1.txt and puzzle4x4-hard2.txt are 38 and 
 
 You should expect to run out of memory when using the Hamming priority function. Be sure not to put the JVM option in the wrong spot or it will be treated as a command-line argument, e.g.
 
-    java -Xmx1600m hw4.puzzle.Solver input/puzzle36.txt
+    java -Xmx1600m hw4.hw4.puzzle.Solver input/puzzle36.txt
 
 #### My program is too slow to solve some of the large sample puzzles, even if given a huge amount of memory. Is this OK?
 
@@ -228,9 +228,9 @@ Here are the puzzles you are explicitly expected to solve:
 
 Your computer is probably more powerful than the autograder. Notably, the AG has much less memory. You should be able to complete puzzles 30 and 31 in less than a second, and they should also work if you use only 128 megabytes of memory. To run your code with only 128 megabytes, try running your code with the following command:
 
-    java -Xmx128M hw4.puzzle.Solver ./input/puzzle30.txt
-    java -Xmx128M hw4.puzzle.Solver ./input/puzzle31.txt
-    java -Xmx128M hw4.puzzle.Solver ./input/puzzle4x4-30.txt
+    java -Xmx128M hw4.hw4.puzzle.Solver ./input/puzzle30.txt
+    java -Xmx128M hw4.hw4.puzzle.Solver ./input/puzzle31.txt
+    java -Xmx128M hw4.hw4.puzzle.Solver ./input/puzzle4x4-30.txt
 
 If your code is taking longer, by far the **most likely issue is that you are not implementing the first critical optimization properly**. Another possiblity is that you are creating a hash table of every board ever seen, which may cause the AG computer to run out of memory.
 
