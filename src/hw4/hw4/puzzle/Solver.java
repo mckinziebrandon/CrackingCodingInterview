@@ -72,40 +72,30 @@ public class Solver {
 
     public Solver(Board initial) {
         this.initial = initial;
-        solution = solve();
+        solve();
     }
 
-    private Iterable<Board> solve() {
-        // 1. Insert initial search node into a PQ.
+    private void solve() {
+
         PriorityQueue<SearchNode> fringe = new PriorityQueue<>();
         HashSet<Board> boardsExplored = new HashSet<>();
-
         fringe.add(new SearchNode(initial, 0, null));
-        while (!fringe.isEmpty()) {
 
+        while (!fringe.isEmpty()) {
             // Remove 'best' node from the fringe.
             SearchNode searchNode = fringe.poll();
-            if (searchNode.board.isGoal()) {
-                Iterable<Board> boards = boardHistory(new ArrayList<>(), searchNode);
-                nMoves = searchNode.numMoves;
-                return boards;
-            }
             boardsExplored.add(searchNode.board);
-
-            // Loop over all next moves in search tree, excluding previous board configuration.
+            // Goal-test.
+            if (searchNode.board.isGoal()) {
+                solution = boardHistory(new ArrayList<>(), searchNode);
+                nMoves   = searchNode.numMoves;
+                return;
+            }
+            // Loop over all next moves in search tree, excluding previous board configurations.
             for (SearchNode neighbor : searchNode.neighbors()) {
-
-                // Put all neighbors in fringe.
                 if (!boardsExplored.contains(neighbor.board)) fringe.add(neighbor);
-
             }
         }
-        return null;
-    }
-
-
-    public Iterable<Board> solution() {
-        return this.solution;
     }
 
     private Iterable<Board> boardHistory(ArrayList<Board> boards, SearchNode node) {
@@ -114,6 +104,10 @@ public class Solver {
         boardHistory(boards, node.prevNode);
         boards.add(node.board);
         return boards;
+    }
+
+    public Iterable<Board> solution() {
+        return this.solution;
     }
 
     public int moves() {
