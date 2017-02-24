@@ -19,6 +19,7 @@ public class PrimsAlgorithm {
 
 
 
+        return G;
     }
 
 
