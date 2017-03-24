@@ -3,7 +3,6 @@ import java.util.*;
 public class Braces {
 
     public static HashMap<Character, Character> PAIRS;
-
     public static boolean match(char o, char c) { return PAIRS.get(o) == c; }
     public static boolean isOpener(char c)      { return PAIRS.containsKey(c); }
     public static boolean isCloser(char c)      { return PAIRS.containsValue(c); }
@@ -35,6 +34,8 @@ public class Braces {
         PAIRS.put('(', ')');
         PAIRS.put('[', ']');
         PAIRS.put('{', '}');
+        ArrayList<Integer> hi = new ArrayList<>();
+        hi.toArray();
 
         ArrayList<String> sampleInputs = new ArrayList<>();
         int N = 3;
