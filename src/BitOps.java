@@ -13,10 +13,5 @@ public class BitOps {
 
     public static void main(String[] args) {
         System.out.println("Hamming distance between 1 and 4 is " + hammingDistance(1, 4));
-
     }
-
-
-
-
 }
